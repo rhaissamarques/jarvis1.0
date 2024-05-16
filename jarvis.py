@@ -15,12 +15,12 @@ import key
 engine = pyttsx3.init('sapi5')
 
 # weather
-link = f"https://api.openweathermap.org/data/2.5/weather?q={key.cidade}&appid={key.API_KEY}&units=metric"
+link = f"https://api.openweathermap.org/data/2.5/weather?q={key.city}&appid={key.API_KEY}&units=metric"
 
 requisicao = requests.get(link)
 requisicao_dic = requisicao.json()
-descricao = requisicao_dic['weather'][0]['description']
-temperatura = requisicao_dic['main']['temp']
+description = requisicao_dic['weather'][0]['description']
+temperature = requisicao_dic['main']['temp']
 
 # object creation
 engine = pyttsx3.init('sapi5')
@@ -46,7 +46,6 @@ def speak(audio):
   print(audio)
   engine.runAndWait()
 
-
 # to convert voice into text
 def takecommand():
   r = sr.Recognizer()
@@ -55,13 +54,11 @@ def takecommand():
     r.pause_threshold = 1
     audio = r.listen(source, timeout=1, phrase_time_limit=5)
 
-
   try:
     print("Recognizing...")
     query = r.recognize_google(audio, language='en-US')
     # query = r.recognize_google(audio, language='pt-BR')
     print(f"user said: {query}")
-
 
   except Exception as e:
     speak("I'm sorry Sir. I didn't understand what you just said")
@@ -84,13 +81,9 @@ def wish():
 if __name__ == '__main__':
   wish()
 
-
   while True:
   # if 1:
     query = takecommand().lower()
-
-    # Logic for tasks
-
 
     # Logic for tasks
 
@@ -120,11 +113,9 @@ if __name__ == '__main__':
       cap.release()
       cv2.destroyAllWindows()
 
-
     elif "ip address" in query:
       ip = get('https://api.ipify.org').text
       speak(f"Your IP address is {ip}")
-
 
     elif "wikipedia" in query:
       speak("Searching wikipedia...")
@@ -134,18 +125,15 @@ if __name__ == '__main__':
       speak(results)
       print(results)
 
-
     elif "open google" in query:
       speak("For sure Sir. What should I search on google?")
       cm = takecommand().lower()
       speak("Here is what I found on google")
       webbrowser.open_new_tab(f"{cm}")
 
-
     # update
     # elif "send message" in query:
     #   kit.sendwhatmsg("")
-
 
     elif "open youtube" in query:
       speak("What video do you want to watch Sir?")
@@ -154,7 +142,7 @@ if __name__ == '__main__':
       speak("Great choice Sir!")
       
     elif "weather" in query:
-      speak(f"The current weather in {key.cidade} is {descricao} and the temperature is {temperatura} degrees celsius")
+      speak(f"The current weather in {key.city} is {description} and the temperature is {temperature} degrees celsius")
 
     elif "thank you" in query:
       speak("Happy to help. If you need anything else, just say the word")

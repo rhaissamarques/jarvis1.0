@@ -8,6 +8,6 @@ Here are some notes you need to make the program run as smoothly as possible.
   * Copy the API Key
 3 - Create a file in the root of the project called key.py
   * API_KEY = the APY Key that you copied
-  * cidade = the city you want to know the weather
+  * city = the city you want to know the weather
 That's all for now. Improvements will come with time.
 I hope you enjoy.
