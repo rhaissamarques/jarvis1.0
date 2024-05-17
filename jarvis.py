@@ -10,6 +10,8 @@ import pywhatkit as kit
 import sys
 import requests
 import key
+import cvlib as cv
+# from cvlib.object_detection import draw_bbox
 
 # object creation
 engine = pyttsx3.init('sapi5')
@@ -82,6 +84,21 @@ if __name__ == '__main__':
   wish()
 
   while True:
+
+    # object detection
+    video = cv2.VideoCapture(0)
+    labels = []
+
+    ret, frame = video.read()
+    bbox, label, conf = cv.detect_common_objects(frame, model='yolov3-tiny', confidence=0.02, enable_gpu=False, nms_thresh=0.1)
+
+    for item in label:
+      if item in labels:
+        pass
+      else:
+        labels = item
+    print(labels)
+
   # if 1:
     query = takecommand().lower()
 
@@ -143,6 +160,12 @@ if __name__ == '__main__':
       
     elif "weather" in query:
       speak(f"The current weather in {key.city} is {description} and the temperature is {temperature} degrees celsius")
+      
+    elif "see" in query:
+      if labels != []:
+        speak(f"I can see a {labels}")
+      else:
+        speak("I can't see anything, sorry Sir")
 
     elif "thank you" in query:
       speak("Happy to help. If you need anything else, just say the word")
