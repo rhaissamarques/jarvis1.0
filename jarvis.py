@@ -118,17 +118,17 @@ if __name__ == '__main__':
       speak("Very well, Sir. I'm opening the cmd now.")
       os.system("start cmd")
 
-    elif "open the camera" in query:
-      speak("Opening the camera right away.")
-      cap = cv2.VideoCapture(0)
-      while True:
-        ret, img = cap.read()
-        cv2.imshow('webcam', img)
-        k = cv2.waitKey(50)
-        if k == 27:
-          break;
-      cap.release()
-      cv2.destroyAllWindows()
+    # elif "open the camera" in query:
+    #   speak("Opening the camera right away.")
+    #   cap = cv2.VideoCapture(0)
+    #   while True:
+    #     ret, img = cap.read()
+    #     cv2.imshow('webcam', img)
+    #     k = cv2.waitKey(50)
+    #     if k == 27:
+    #       break
+    #   cap.release()
+    #   cv2.destroyAllWindows()
 
     elif "ip address" in query:
       ip = get('https://api.ipify.org').text
